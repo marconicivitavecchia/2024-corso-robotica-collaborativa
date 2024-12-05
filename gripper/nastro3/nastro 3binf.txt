@@ -1,0 +1,39 @@
+ Program
+   BeforeStart
+     volo: Stop
+     ready≔ False 
+   Robot Program
+     Wait ready≟ True 
+     MoveJ
+       Approccio_A
+       Presa_A
+       Gripper Close (1)
+       Uscita_A
+       Approccio_B
+       Rilascio_A
+       Gripper Open (1)
+       Approccio_B
+       Approccio_A
+   Thread_1
+     If FC_High≟ True 
+       volo: Stop
+       Set Nastro_ON=On
+       Wait FC_High=LO
+     ElseIf FC_Start≟ True 
+       volo: Stop
+       Set Nastro_ON=On
+       Wait FC_End=LO
+     ElseIf FC_End≟ True 
+       volo: Stop
+       volo: Reset
+       Wait: 0.5
+       Set Nastro_ON=Off
+       ready≔ True 
+       Wait FC_End=LO
+       ready≔ False 
+       Set Nastro_ON=On
+       volo: Start
+     If volo≥10
+       Set Nastro_ON=Off
+       volo: Reset
+       volo: Stop
