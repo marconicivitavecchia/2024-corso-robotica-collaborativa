@@ -1,0 +1,76 @@
+def P6_novembre():
+  step_count_427d32d0_8ab5_4487_a361_c46ebc2e5710 = 0.0
+  thread Step_Counter_Thread_2d3732b0_3ef5_4184_8b99_261fbf99f931():
+    while (True):
+      step_count_427d32d0_8ab5_4487_a361_c46ebc2e5710 = step_count_427d32d0_8ab5_4487_a361_c46ebc2e5710 + 1.0
+      sync()
+    end
+  end
+  run Step_Counter_Thread_2d3732b0_3ef5_4184_8b99_261fbf99f931()
+  set_safety_mode_transition_hardness(1)
+  set_tcp(p[0.0375,0.0,0.083,0.0,0.0,0.0])
+  set_payload(1.0, [-0.012, -0.005, 0.046])
+  set_tool_voltage(24)
+  set_gravity([0.0, 0.0, 9.82])
+  set_standard_analog_input_domain(0, 1)
+  set_standard_analog_input_domain(1, 1)
+  set_tool_analog_input_domain(0, 1)
+  set_tool_analog_input_domain(1, 1)
+  set_analog_outputdomain(0, 0)
+  set_analog_outputdomain(1, 0)
+  set_input_actions_to_default()
+  global parallelo=p[1.2122131398326075E-6,0.1500036957322406,0.2000145501490997,8.665644107087391E-5,-3.074787590163792E-5,2.4958435593227474E-5]
+  global perpendicolare=p[1.3133400607635848E-5,0.4499782418304641,0.014952299880116995,4.8195394996186283E-4,2.221762010521941,2.2210105916999128]
+  rtde_set_watchdog("speed_slider_mask", 10.0, "ignore")
+  # begin: URCap Installation Node
+  #   Source: OnRobot, 6.1.0, OnRobot A/S
+  #   Type: OnRobot Setup
+  # end: URCap Installation Node
+  global cnt_2=0
+  $ 1 "BeforeStart"
+  $ 2 "conta≔0"
+  global conta=0
+  while (True):
+    $ 3 "Robot Program"
+    $ 4 "Loop 5 times"
+    Loop_1 = 0
+    while (Loop_1 < 5):
+      $ 5 "MoveJ"
+      $ 6 "partenza" "breakAfter"
+      movej(get_inverse_kin(p[.295823492168, .029540261693, .245993208240, -1.644599861008, 2.601542226231, .008810440135], qnear=[0.5506463050842285, -1.5286982695208948, -1.5564902464496058, -1.5608838240252894, 1.5783610343933105, 1.0000057220458984]), a=6.283185307179586, v=6.283185307179586)
+      $ 7 "MoveL"
+      $ 8 "discesa" "breakAfter"
+      movel(p[.310855451195, .039214775400, .057602057162, 1.674541667456, -2.645527520438, -.013761518994], a=9.0, v=0.36)
+      $ 9 "Popup: prenderlo"
+      popup("prenderlo", "Message", False, False, blocking=True)
+      $ 10 "salita" "breakAfter"
+      movel(p[.310881849265, .039258125765, .151650230528, 1.674673516886, -2.645631363904, -.013894084432], a=1.2, v=0.25)
+      $ 11 "MoveJ"
+      $ 12 "sposta" "breakAfter"
+      movej(get_inverse_kin(p[.073602170959, .380375084290, .121530812875, -1.636396949755, 2.657091496140, -.007301827792], qnear=[1.6270787715911865, -2.095022503529684, -1.410048786793844, -1.1990016142474573, 1.5477360486984253, 2.0993869304656982]), a=6.283185307179586, v=6.283185307179586)
+      $ 13 "Pallet"
+      cnt_2_x_ratio = (cnt_2%2)/1
+      cnt_2_y_ratio = (floor(cnt_2/2)%2)/1
+      cnt_2_z_ratio = (floor(cnt_2/4))/1
+      pose_2 = interpolate_pose(interpolate_pose(interpolate_pose(p[.132540624655, .381987178357, .012024952877, -2.815561845640, 1.238537976676, .091615370535], p[-.069814156512, .382003457588, .012055526427, -2.815386236910, 1.238670500064, .091603298572], cnt_2_x_ratio), interpolate_pose(p[.116969966829, .307628120584, .013640332232, -2.815406555517, 1.238455529285, .091658572903], p[-.069853099278, .307601072274, .012025167136, -2.815464528510, 1.238631853249, .091551354033], cnt_2_x_ratio), cnt_2_y_ratio), interpolate_pose(interpolate_pose(p[.132545058049, .381991360687, .053262654096, -2.815529622908, 1.238644078569, .091661602869], p[.036996380088, .264585455892, .069739877798, -2.389157831045, 1.993011190933, .072308671925], cnt_2_x_ratio), interpolate_pose(p[.116974365185, .307644252134, .054025972407, -2.815286555592, 1.238563319199, .091643436159], p[-.069883293501, .307580604450, .053988135413, -2.815569425103, 1.238588640016, .091556014602], cnt_2_x_ratio), cnt_2_y_ratio), cnt_2_z_ratio)
+      if (cnt_2 >= 7):
+        cnt_2 = 0
+      else:
+        cnt_2 = cnt_2 + 1
+      end
+      $ 24 "Approach_1" "noBreak"
+      movel(pose_trans(pose_2, pose_trans(pose_inv(p[.132550229920, .381985022395, .012039257014, -2.815499514395, 1.238588828991, .091676116342]),p[.132556919536, .381981306371, .093238901778, -2.815503925259, 1.238617784065, .091747436879])), a=2.0, v=2.0)
+      $ 25 "PatternPoint_1" "noBreak"
+      movel(pose_2, a=2.0, v=2.0)
+      $ 26 "conta≔conta+1" "noBreak"
+      global conta=conta+1
+      $ 27 "Popup: oggetto posato" "noBreak"
+      popup(str_cat("",conta), "Message", False, False, blocking=True)
+      $ 28 "Wait: 2.0" "noBreak"
+      sleep(2.0)
+      $ 29 "Exit_1" "noBreak"
+      movel(pose_trans(pose_2, pose_trans(pose_inv(p[.132550229920, .381985022395, .012039257014, -2.815499514395, 1.238588828991, .091676116342]),p[.132582900780, .381991288371, .093258836600, -2.815444299416, 1.238573037735, .091726943142])), a=2.0, v=2.0)
+      Loop_1 = Loop_1 + 1
+    end
+  end
+end

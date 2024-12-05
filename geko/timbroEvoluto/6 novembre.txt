@@ -1,0 +1,36 @@
+ Program
+   BeforeStart
+     conta≔0
+   Robot Program
+     Loop 5 times
+       MoveJ
+         partenza
+         Pallet
+           Pattern: Square
+             Corner1_2
+             Corner2_2
+             Corner3_2
+             Corner4_2
+           PalletSequence
+             Approach_2
+             PatternPoint_2
+             Set
+             Wait
+             Exit_2
+         Pallet
+           Pattern: Box
+             Corner1_1
+             Corner2_1
+             Corner3_1
+             Corner4_1
+             Corner5_1
+             Corner6_1
+             Corner7_1
+             Corner8_1
+           PalletSequence
+             Approach_1
+             PatternPoint_1
+             conta≔conta+1
+             Popup: oggetto posato
+             Wait: 2.0
+             Exit_1
