@@ -1,0 +1,33 @@
+ Program
+   BeforeStart
+     MoveJ
+       Waypoint_1
+       SG Grip (86)
+   Robot Program
+     var_1≔'vino rosso:1, vino bianco:2'
+     If var_1==1
+       MoveJ
+         appr
+         Waypoint_2
+         SG Grip (20)
+         Waypoint_3
+         Waypoint_4
+         MoveJ
+           Waypoint_5
+           Wait: 2.0
+           Waypoint_6
+           Wait: 1.0
+           Waypoint_7
+           MoveJ
+             Waypoint_8
+             Waypoint_9
+             Waypoint_10
+             SG Release (80)
+     ElseIf var_1==2
+       MoveJ
+         Waypoint_11
+         Waypoint_12
+         SG Grip (20)
+         Waypoint_14
+         Waypoint_15
+         Waypoint_16
