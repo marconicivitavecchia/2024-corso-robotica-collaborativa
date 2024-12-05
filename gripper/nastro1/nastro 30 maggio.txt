@@ -1,0 +1,51 @@
+ Program
+   BeforeStart
+     cont≔0
+     Gripper Activate
+     ready≔ False 
+     volo: Stop
+     Gripper Move35% (1)
+   Robot Program
+     Wait ready≟ True 
+     MoveJ
+       partenza
+       Waypoint_1
+     MoveL
+       Waypoint_2
+       Gripper Close (1)
+       Waypoint_3
+     Pallet
+       Pattern: Box
+         Corner1_1
+         Corner2_1
+         Corner3_1
+         Corner4_1
+         Corner5_1
+         Corner6_1
+         Corner7_1
+         Corner8_1
+       PalletSequence
+         Approach_1
+         PatternPoint_1
+         Gripper Open (1)
+         Wait: 1.0
+         Exit_1
+   Thread_1
+     If FC_Start
+       Set Nastro_ON=On
+       volo: Start
+       volo: Reset
+       Wait FC_Start=LO
+     ElseIf FC_End
+       Wait: 0.3
+       Set Nastro_ON=Off
+       ready≔ True 
+       Wait FC_End=LO
+       Set Nastro_ON=On
+       ready≔ False 
+       volo: Start
+       volo: Reset
+     If volo>10
+       volo: Stop
+       volo: Reset
+       Set Nastro_ON=Off
