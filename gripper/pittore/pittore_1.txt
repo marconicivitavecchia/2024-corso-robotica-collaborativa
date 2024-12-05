@@ -1,0 +1,40 @@
+ Program
+   BeforeStart
+     MoveJ
+       Home_1
+     Gripper Activate
+   Robot Program
+     Call inzuppo
+     Call spennella_basso
+     Call spennella_basso
+     Call inzuppo
+     Call spennella_alto
+     Call spennella_alto
+   spennella_alto
+     MoveJ
+       Waypoint_6
+       MoveL
+         Waypoint_1
+         Waypoint_2
+         MoveJ
+           Waypoint_7
+         Waypoint_3
+         Waypoint_4
+   spennella_basso
+     MoveJ
+       ar_spenn_basso
+       MoveL
+         spennellata_1
+         spennellata_2
+         MoveJ
+           Waypoint_5
+         spennellata_3
+         spennellata_4
+   inzuppo
+     MoveJ
+       arrivobarattolo
+       MoveL
+         inzuppo_1
+         esco_inzuppo_1
+         inzuppo_2
+         esco_inzuppo_2
