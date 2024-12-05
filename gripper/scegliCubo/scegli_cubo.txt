@@ -1,0 +1,39 @@
+ Program
+   BeforeStart
+     Gripper Reset and Activate
+     Gripper Open (1)
+     MoveJ
+       Waypoint_h
+   Robot Program
+     MoveJ
+       snap_pos
+     Cam Locate
+       For next object
+         MoveL
+           approccio_pick
+           pick
+           Gripper Close (1)
+           esci_pick
+         MoveJ
+           move_to_drop_rd
+           MoveL
+             place
+             Gripper Open (1)
+             Waypoint_3
+           Waypoint_3
+       If no object found
+         Cam Locate
+           For next object
+             MoveL
+               approccio_pic_1
+               pick_1
+               Gripper Close (1)
+               esci_pick_1
+             MoveJ
+               move_to_drop_ar
+               MoveL
+                 Waypoint_4
+                 Gripper Open (1)
+                 move_to_drop_ar
+           If no object found
+             Popup: Metti il nuovo cubo
