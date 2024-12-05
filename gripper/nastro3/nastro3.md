@@ -1,0 +1,1 @@
+Altra pallettizzazione da nastro.
