@@ -1,0 +1,1 @@
+Spennella una parete verticale.
