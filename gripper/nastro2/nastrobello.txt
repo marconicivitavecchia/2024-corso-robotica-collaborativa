@@ -1,0 +1,47 @@
+ Program
+   Robot Program
+     Gripper Activate
+     Gripper Open (1)
+     volo: Stop
+     ready≔ False 
+     engineon≔Nastro_ON
+     engineon≔ False 
+     sensoreBasso≔FC_Start
+     sensoreAlto≔FC_High
+     sensoreStop≔FC_End
+     tempoVolo≔4000
+     Loop
+       If FC_Start== True 
+         engineon≔ True 
+         Wait FC_Start=LO
+       ElseIf FC_High== True 
+         engineon≔ True 
+         Wait FC_High=LO
+       ElseIf FC_End== True 
+         engineon≔ False 
+         MoveL
+           Waypoint_1
+         MoveL
+           Waypoint_2
+         Gripper Move51% (1)
+         MoveL
+           Waypoint_3
+         MoveL
+           Waypoint_4
+         Pallet
+           Pattern: Square
+             Corner1_1
+             Corner2_1
+             Corner3_1
+             Corner4_1
+           PalletSequence
+             Approach_1
+             PatternPoint_1
+             Set
+             Wait volo>tempoVolo
+             Exit_1
+         volo: Start
+         volo: Reset
+       ElseIf volo>tempoVolo
+         volo: Stop
+         volo: Reset
