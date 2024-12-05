@@ -1,0 +1,43 @@
+ Program
+   BeforeStart
+     Gripper Activate
+     Gripper Open (1)
+     MoveJ
+       Rest
+     MoveJ
+       exit_picking
+     MoveJ
+       Pick_Up
+     MoveJ
+       exit_picking
+     MoveJ
+       drop_entry
+     MoveJ
+       drop
+     Gripper Activate
+     P≔Pick_Up
+     D≔drop
+     distance≔0.024
+     Popup: fine prestart
+   Robot Program
+     Loop 4 times
+       MoveJ
+         drop_entry
+       MoveJ
+         exit_picking
+       MoveL
+         P
+         Gripper Close (1)
+       MoveL
+         exit_picking
+       MoveL
+         drop_entry
+       MoveL
+         D
+         Gripper Open (1)
+       P[2]=P[2]-distance
+       D[2]=D[2]+(distance+0.005)
+     If Loop_2≟4
+       D≔drop
+       P≔Pick_Up
+       Popup: Fine impilamento
