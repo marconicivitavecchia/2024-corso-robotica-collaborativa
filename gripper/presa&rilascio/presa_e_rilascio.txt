@@ -1,0 +1,15 @@
+ Program
+   BeforeStart
+     MoveJ
+       riposo
+   Robot Program
+     MoveJ
+       approccio1
+       presa
+       Gripper Activate
+       Gripper Close (1)
+       approccio1
+       approccio2
+       rilascio
+       Gripper Open (1)
+       approccio2
