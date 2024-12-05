@@ -1,0 +1,15 @@
+ Program
+   Robot Program
+     MoveJ
+       Waypoint_1
+     MoveL
+       Waypoint_2
+       Waypoint_3
+       SG Grip (35)
+       Waypoint_4
+     MoveJ
+       Waypoint_5
+     MoveL
+       Waypoint_6
+       SG Release (100)
+       Waypoint_7
