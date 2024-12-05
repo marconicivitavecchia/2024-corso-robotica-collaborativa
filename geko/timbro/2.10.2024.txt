@@ -1,0 +1,27 @@
+ Program
+   BeforeStart
+     p_12≔ True 
+     timer_1: Start
+     MoveJ
+       Start
+     p≔Start
+   Robot Program
+     Loop p_12
+       p[0]=p[0]+0.065
+       MoveL
+         Direction: Base Z-
+           Until (distance)
+         Direction: Base Z+
+           Until (distance)
+         p
+       Wait: 1.0
+       MoveL
+         p
+   Thread_1
+     If timer_1>4
+       timer_1: Stop
+       p_12≔ False 
+       Popup: premi per riavviare il robot
+       p_12≔ True 
+       timer_1: Start
+       timer_1: Reset

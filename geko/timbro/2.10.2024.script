@@ -1,0 +1,148 @@
+def P2102024():
+  set_gravity([0.0, 0.0, 9.82])
+  set_tool_voltage(24)
+  step_count_ca010d09_bc69_414e_8278_488d90cc5fbb = 0.0
+  thread Step_Counter_Thread_95e53cf3_bc02_43dc_8051_4c123c4cd663():
+    while (True):
+      step_count_ca010d09_bc69_414e_8278_488d90cc5fbb = step_count_ca010d09_bc69_414e_8278_488d90cc5fbb + 1.0
+      sync()
+    end
+  end
+  run Step_Counter_Thread_95e53cf3_bc02_43dc_8051_4c123c4cd663()
+  set_standard_analog_input_domain(0, 1)
+  set_standard_analog_input_domain(1, 1)
+  set_tool_analog_input_domain(0, 1)
+  set_tool_analog_input_domain(1, 1)
+  set_analog_outputdomain(0, 0)
+  set_analog_outputdomain(1, 0)
+  set_input_actions_to_default()
+  set_tcp(p[0.0375,0.0,0.083,0.0,0.0,0.0])
+  set_payload(1.0, [-0.012, -0.005, 0.046])
+  set_safety_mode_transition_hardness(1)
+  global parallelo=p[1.2122131398326075E-6,0.1500036957322406,0.2000145501490997,8.665644107087391E-5,-3.074787590163792E-5,2.4958435593227474E-5]
+  global perpendicolare=p[1.3133400607635848E-5,0.4499782418304641,0.014952299880116995,4.8195394996186283E-4,2.221762010521941,2.2210105916999128]
+  rtde_set_watchdog("speed_slider_mask", 10.0, "ignore")
+  # begin: URCap Installation Node
+  #   Source: OnRobot, 6.1.0, OnRobot A/S
+  #   Type: OnRobot Setup
+  # end: URCap Installation Node
+  global timer_1=0
+  def calculate_point_to_move_towards(feature, direction, position_distance):
+    local posDir=[direction[0], direction[1], direction[2]]
+    if (norm(posDir) < 1e-6):
+      return get_target_waypoint()
+    end
+    local direction_vector_normalized=normalize(posDir)
+    local displacement_pose=p[direction_vector_normalized[0] * position_distance,direction_vector_normalized[1] * position_distance,direction_vector_normalized[2] * position_distance,0,0,0]
+    local wanted_displacement_in_base_frame=pose_sub(pose_trans(feature, displacement_pose), feature)
+    return pose_add(get_target_waypoint(), wanted_displacement_in_base_frame)
+  end
+  global timer_1_is_counting=False
+  thread Timer_Thread():
+    while (True):
+      if (timer_1_is_counting):
+        timer_1 = timer_1 + get_steptime()
+      end
+      sync()
+    end
+  end
+  run Timer_Thread()
+  $ 1 "BeforeStart"
+  $ 2 "p_12≔ True "
+  global p_12=  True  
+  $ 3 "timer_1: Start"
+  timer_1_is_counting = True
+  $ 4 "MoveJ"
+  $ 5 "Start" "breakAfter"
+  movej(get_inverse_kin(p[-.380657607728, -.285176739843, .013925535722, -.860473683218, 2.983730592396, .005002652942], qnear=[-2.2447693983661097, -2.393925491963522, -1.4278023878680628, -0.9194796721087855, 1.585244059562683, -38.92979690230178]), a=1.3962634015954636, v=1.0471975511965976)
+  $ 6 "p≔Start"
+  global p=p[-.380657607728, -.285176739843, .013925535722, -.860473683218, 2.983730592396, .005002652942]
+  $ 19 "Thread_1"
+  thread Thread_1():
+    while (True):
+      $ 20 "If timer_1>4"
+      if (timer_1>4):
+        $ 21 "timer_1: Stop"
+        timer_1_is_counting = False
+        $ 22 "p_12≔ False "
+        global p_12=  False  
+        $ 23 "Popup: premi per riavviare il robot"
+        popup("premi per riavviare il robot", "Message", False, False, blocking=True)
+        $ 24 "p_12≔ True "
+        global p_12=  True  
+        $ 25 "timer_1: Start"
+        timer_1_is_counting = True
+        $ 26 "timer_1: Reset"
+        timer_1 = 0
+      end
+    end
+  end
+  threadId_Thread_1 = run Thread_1()
+  while (True):
+    $ 7 "Robot Program"
+    $ 8 "Loop p_12"
+    thread Thread_while_8():
+      while (True):
+        $ 9 "p[0]=p[0]+0.065"
+        p[0]=p[0]+0.065
+        $ 10 "MoveL"
+        $ 11 "Direction: Base Z-"
+        global move_thread_flag_11=0
+        thread move_thread_11():
+          enter_critical
+          move_thread_flag_11 = 1
+          local towardsPos=calculate_point_to_move_towards(p[0.0,0.0,0.0,0.0,0.0,0.0], [0.0,0.0,-1.0], 0.022)
+          movel(towardsPos, a=1.2, v=0.25)
+          move_thread_flag_11 = 2
+          exit_critical
+        end
+        move_thread_flag_11 = 0
+        move_thread_han_11 = run move_thread_11()
+        while (True):
+          sleep(1.0E-10)
+          if (move_thread_flag_11 > 1):
+            join move_thread_han_11
+            $ 12 "Until (distance)"
+            break
+          end
+          sync()
+        end
+        $ 13 "Direction: Base Z+"
+        global move_thread_flag_13=0
+        thread move_thread_13():
+          enter_critical
+          move_thread_flag_13 = 1
+          local towardsPos=calculate_point_to_move_towards(p[0.0,0.0,0.0,0.0,0.0,0.0], [0.0,0.0,1.0], 0.022)
+          movel(towardsPos, a=1.2, v=0.25)
+          move_thread_flag_13 = 2
+          exit_critical
+        end
+        move_thread_flag_13 = 0
+        move_thread_han_13 = run move_thread_13()
+        while (True):
+          sleep(1.0E-10)
+          if (move_thread_flag_13 > 1):
+            join move_thread_han_13
+            $ 14 "Until (distance)"
+            break
+          end
+          sync()
+        end
+        $ 15 "p" "breakAfter"
+        movel(pose_trans(p[0.0,0.0,0.0,0.0,0.0,0.0], p), a=1.2, v=0.25)
+        $ 16 "Wait: 1.0"
+        sleep(1.0)
+        $ 17 "MoveL"
+        $ 18 "p" "breakAfter"
+        movel(pose_trans(p[0.0,0.0,0.0,0.0,0.0,0.0], p), a=1.2, v=0.25)
+      end
+    end
+    if (p_12):
+      global thread_handler_8=run Thread_while_8()
+      while (p_12):
+        sync()
+      end
+      kill thread_handler_8
+    end
+  end
+end
