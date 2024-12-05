@@ -1,0 +1,26 @@
+ Program
+   BeforeStart
+     pezzo≔ False 
+     Gripper Activate
+     Gripper Open (1)
+     MoveJ
+       riposo
+   Robot Program
+     MoveJ
+       approccio_A
+       presa_A
+       Gripper Close (1)
+       pezzo≔ False 
+       Loop pezzo≟ False 
+         Grip Check
+           If object not detected          
+             Gripper Open (1)
+             Wait: 5.0
+             Gripper Close (1)
+           Else
+             pezzo≔ True 
+       uscita_A
+       approccio_B
+       rilascio_B
+       Gripper Open (1)
+       uscita_B
