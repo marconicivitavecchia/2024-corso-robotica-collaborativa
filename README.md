@@ -9,4 +9,4 @@
 
 # Top video
 
-- [Versa vino](/softGripper/versaVino/WhatsApp Video 2024-12-05 at 17.23.59.mp4)
+- [Versa vino](https://softGripper/versaVino/WhatsApp Video 2024-12-05 at 17.23.59.mp4)
