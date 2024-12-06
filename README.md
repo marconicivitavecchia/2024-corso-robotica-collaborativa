@@ -9,7 +9,5 @@
 
 # Top video
 
-https://github.com/marconicivitavecchia/2024-corso-robotica-collaborativa/raw/refs/heads/main/softGripper/versaVino/versa_vino.mp4
+https://github.com/user-attachments/assets/6edde620-c8b1-4ea6-a7a6-84fa7ec6fddc
 
-
-[Versa vino](/softGripper/versaVino/versa_vino.gif)
