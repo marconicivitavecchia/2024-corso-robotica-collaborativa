@@ -9,4 +9,4 @@
 
 # Top video
 
-[Versa vino](/softGripper/versaVino/versa_vino.mp4)
+[Versa vino](/softGripper/versaVino/versa_vino.gif)
